@@ -3,52 +3,56 @@ import BaseLayout from '@layouts/Base.astro';
 import NavBar from '@components/scafold/Nav.astro';
 import Footer from '@components/scafold/Footer.astro';
 import Icon from '@components/molecules/Icon.svelte';
+import { t } from '@/lib/i18n-service';
+
+const url = new URL(Astro.request.url);
+const currentLang = url.searchParams.get('lang') || 'en';
 
 ---
 
 <BaseLayout
-  title="API | Web Check"
-  description="Get started with the Web Check API."
+  title={`${t('api.title', currentLang)} | Website Check`}
+  description={t('api.description', currentLang)}
 >
   <div class="web-check-page">
-    <NavBar />
+    <NavBar currentLang={currentLang} />
     <main>
-      <h1>Web Check API</h1>
+      <h1>{t('api.heading', currentLang)}</h1>
       <p class="intro">
-        The Web Check API gives you programatic access to over 30 categories of web metrics.<br />
-        Integrate into your own workflows and applications, to monitor any website's performance, SEO, security, and more.
+        {t('api.intro_line1', currentLang)}<br />
+        {t('api.intro_line2', currentLang)}
       </p>
     
       <div class="option-cards">
 
         <div class="card">
-          <h3>API Documentation</h3>
+          <h3>{t('api.doc_title', currentLang)}</h3>
           <p>
-            View listing of all available endpoints, their usage, output and examples.
+            {t('api.doc_description', currentLang)}
           </p>
           <div class="buttons">
-            <a href="/web-check-api/spec">
+            <a href={`/web-check-api/spec?lang=${currentLang}`}>
               <img src="/assets/images/swagger.svg" />
-              OpenAPI Spec
+              {t('api.open_api_spec', currentLang)}
             </a>
           </div>
         </div>
         <div class="card">
-          <h3>API Key</h3>
+          <h3>{t('api.key_title', currentLang)}</h3>
           <p>
-            Get your API key, and start using the API.
+            {t('api.key_description', currentLang)}
           </p>
           <div class="buttons">
-            <a href="/account">
+            <a href={`/account?lang=${currentLang}`}>
               <img src="/assets/images/webauthn.svg" />
-              Sign Up
+              {t('api.sign_up', currentLang)}
             </a>
           </div>
         </div>
         <div class="card">
-          <h3>API Source</h3>
+          <h3>{t('api.source_title', currentLang)}</h3>
           <p>
-            View, edit, download or deploy the API from source.
+            {t('api.source_description', currentLang)}
           </p>
           <div class="buttons">
             <a href="https://github.com/xray-web/web-check-api">

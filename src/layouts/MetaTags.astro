@@ -12,10 +12,10 @@ interface Props {
 }
 
 // Default meta tag values
-const siteInfo = {
-  title: 'Web Check',
-	titleLong: 'Web Check - X-Ray Vision for any Website',
-  description: 'Web Check is the all-in-one OSINT and security tool, for revealing the inner workings of any website',
+const defaults = {
+  title: 'Website Check',
+	titleLong: 'Website Check - X-Ray Vision for any Website',
+  description: 'Website Check is the all-in-one OSINT and security tool, for revealing the inner workings of any website',
   keywords: '',
   author: 'Alicia Sykes',
   twitter: '@Lissy_Sykes',
@@ -29,15 +29,15 @@ const siteInfo = {
 
 // Set values for the meta tags, from props or defaults
 const {
-	title = siteInfo.title,
-	description = siteInfo.description,
-	keywords = siteInfo.keywords,
+	title = defaults.title,
+	description = defaults.description,
+	keywords = defaults.keywords,
 	breadcrumbs,
 	customSchemaJson,
 } = Astro.props;
 
-// Set non-customizable values for meta tags, from the siteInfo
-const { site, author, twitter, analytics, titleLong } = siteInfo;
+// Set non-customizable values for meta tags, from the defaults
+const { site, author, twitter, analytics, titleLong } = defaults;
 
 // Given a map of breadcrumbs, return the JSON-LD for the BreadcrumbList schema
 const makeBreadcrumbs = () => {

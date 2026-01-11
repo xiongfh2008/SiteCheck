@@ -1,6 +1,7 @@
 ---
 import { ViewTransitions } from 'astro:transitions'
 import MetaTags from '@layouts/MetaTags.astro';
+import I18nProvider from '@components/I18nProvider.astro';
 
 import '@styles/typography.scss';
 import '@styles/global.scss';
@@ -18,10 +19,14 @@ interface Props {
 	}>
 }
 
+// 检测语言
+const url = new URL(Astro.request.url);
+const lang = url.searchParams.get('lang') || 'en';
+
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang={lang} data-theme="dark">
 	<head>
 		<ViewTransitions />
 		<MetaTags {...Astro.props } />
@@ -34,6 +39,8 @@ interface Props {
 			>
 	</head>
 	<body>
-		<slot />
+		<I18nProvider>
+			<slot />
+		</I18nProvider>
 	</body>
 </html>

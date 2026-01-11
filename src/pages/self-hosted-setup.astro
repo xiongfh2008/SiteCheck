@@ -3,16 +3,20 @@ import BaseLayout from '@layouts/Base.astro';
 import NavBar from '@components/scafold/Nav.astro';
 import Footer from '@components/scafold/Footer.astro';
 import Icon from '@components/molecules/Icon.svelte';
+import { t } from '@/lib/i18n-service';
+
+const url = new URL(Astro.request.url);
+const currentLang = url.searchParams.get('lang') || 'en';
 
 const cardData = [
   {
-    title: 'Deploy with Docker',
-    description: 'Just one command, and you\'ll have your own Web Check instance running on your server in minutes.',
+    title: t('self_host.docker_title', currentLang),
+    description: t('self_host.docker_description', currentLang),
     command: 'docker run -p 3000:3000 lissy93/web-check',
   },
   {
-    title: '1-Click Deploy',
-    description: 'Don\'t have a server? Not a problem! Deploy Web Check with one click on Vercel or Netlify.',
+    title: t('self_host.one_click_title', currentLang),
+    description: t('self_host.one_click_description', currentLang),
     buttons: [
       {
         name: 'Vercel',
@@ -32,11 +36,11 @@ const cardData = [
     ]
   },
   {
-    title: 'Build from Source',
-    description: 'Want to customize Web Check? Clone the repository and deploy it on your server.',
+    title: t('self_host.source_title', currentLang),
+    description: t('self_host.source_description', currentLang),
     buttons: [
       {
-        name: 'GitHub',
+        name: t('self_host.github_button', currentLang),
         image: '/assets/images/github.svg',
         link: '',
       }
@@ -47,15 +51,15 @@ const cardData = [
 ---
 
 <BaseLayout
-  title="Self-Hosted Setup | Web Check"
-  description="Get started with running Web Check locally or on your own server."
+  title={`${t('self_host.title', currentLang)} | Website Check`}
+  description={t('self_host.description', currentLang)}
 >
   <div class="web-check-page">
-    <NavBar />
+    <NavBar currentLang={currentLang} />
     <main>
-      <h1>Self-Hosted Setup</h1>
+      <h1>{t('self_host.heading', currentLang)}</h1>
       <p>
-        Get your own free instance of Web Check, running locally or on your server.
+        {t('self_host.intro', currentLang)}
       </p>
     
       <div class="option-cards">

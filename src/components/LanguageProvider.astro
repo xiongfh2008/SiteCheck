@@ -1,0 +1,26 @@
+---
+// src/components/LanguageProvider.astro
+import { t, getSupportedLanguages, isValidLanguage } from '@/lib/i18n-service';
+
+// 从 URL 参数获取当前语言
+const url = new URL(Astro.request.url);
+const urlLang = url.searchParams.get('lang');
+
+// 验证语言是否支持，否则使用默认语言
+const currentLang = (urlLang && isValidLanguage(urlLang)) ? urlLang : 'en';
+---
+
+<script>
+  // 将当前语言保存到 localStorage
+  document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const lang = urlParams.get('lang') || 'en';
+    
+    if (lang) {
+      localStorage.setItem('lang', lang);
+      document.documentElement.lang = lang;
+    }
+  });
+</script>
+
+<slot />

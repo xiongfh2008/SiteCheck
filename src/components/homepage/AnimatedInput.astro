@@ -1,13 +1,22 @@
 ---
+import { t } from '@/lib/i18n-service';
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'en' } = Astro.props;
+
 const placeholders = [
-  'duck.com',
-  'github.com',
-  'google.com',
-  'x.com',
-  'bbc.co.uk',
-  'wikipedia.org',
-  'openai.com',
+  t('home.examples_duck', lang) || 'duck.com',
+  t('home.examples_google', lang) || 'google.com',
+  t('home.examples_x', lang) || 'x.com',
+  t('home.examples_bbc', lang) || 'bbc.co.uk',
+  t('home.examples_wikipedia', lang) || 'wikipedia.org',
+  t('home.examples_openai', lang) || 'openai.com',
 ];
+
+const exampleText = t('home.examples', lang) || 'E.g.';
 ---
 
 
@@ -17,10 +26,10 @@ const placeholders = [
     id="url-input"
     type="url"
     name="url"
-    placeholder="E.g. duck.com"
+    placeholder={`${exampleText} ${placeholders[0]}`}
   />
   <div class="placeholder-container">
-    <span class="starter" aria-hidden="true">E.g.</span>
+    <span class="starter" aria-hidden="true">{exampleText}</span>
     {placeholders.map((placeholder, index) => (
       <span class={`placeholder ${index === 0 ? 'active' : ''}`} aria-hidden="true">{placeholder}</span>
     ))}
@@ -31,13 +40,13 @@ const placeholders = [
 document.addEventListener('DOMContentLoaded', () => {
   // Grab the DOM elements we need
   const placeholders = document.querySelectorAll('.placeholder');
-  const starter = document.querySelector('.starter') as HTMLElement;
-  const inputField = document.getElementById('url-input') as HTMLInputElement;
+  const starter = document.querySelector('.starter');
+  const inputField = document.getElementById('url-input');
 
   // Variables for the configuring + tracking the placeholder animation
   let currentIndex = 0;
   const timeBetweenPlaceholders = 3000;
-  let interval: ReturnType<typeof setInterval>;
+  let interval;
   
   // Function to change which placeholder is currently visible
   const changePlaceholder = () => {
@@ -98,7 +107,10 @@ document.addEventListener('DOMContentLoaded', () => {
   inputField.setAttribute('placeholder', '');
 
   // Make visible the placeholder container
-  (document.querySelector('.placeholder-container') as HTMLElement).style.display = 'flex';
+  const placeholderContainer = document.querySelector('.placeholder-container');
+  if (placeholderContainer) {
+    placeholderContainer.style.display = 'flex';
+  }
 
   // And finally, start the animation!
   startPlaceholderAnimation();
@@ -113,17 +125,24 @@ document.addEventListener('DOMContentLoaded', () => {
 .input-container {
   position: relative;
   overflow: hidden;
+  width: 100%;
   input {
     width: 100%;
-    padding: 1rem;
+    padding: 1.2rem 1rem;
     background: var(--background-50);
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: var(--text-color-secondary);
-    border: 2px solid var(--text-color);
-    border-radius: 3px;
+    border: 2px solid var(--text-color-thirdly);
+    border-radius: 8px;
     transition: all 0.3s ease-in-out;
+    outline: none;
+    /* 隐藏原生占位符以避免重影 */
+    &::placeholder {
+      color: transparent;
+    }
     &:focus {
       border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-transparent);
     }
   }
 }
@@ -138,15 +157,18 @@ document.addEventListener('DOMContentLoaded', () => {
   align-items: center;
   padding-left: 16px;
   pointer-events: none;
+  z-index: 1; /* 确保占位符文本在输入框之上 */
 }
 
 .starter, .placeholder {
   position: absolute;
   width: 100%;
-  font-size: 2rem;
+  font-size: 1.5rem; /* 与输入框文字大小一致 */
   color: var(--text-color-thirdly);
-  padding: 0.1rem 0;
+  padding: 1.2rem 1rem; /* 与输入框内边距一致 */
   user-select: none;
+  text-align: left; /* 确保文本左对齐 */
+  line-height: 1.5; /* 确保垂直居中对齐 */
 }
 
 .starter {

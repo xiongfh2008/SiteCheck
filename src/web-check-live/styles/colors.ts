@@ -1,15 +1,15 @@
 
 const colors = {
-  primary: '#c1fb41',
-  primaryLighter: '#cff97a',
+  primary: '#8a2be2',
+  primaryLighter: '#a45deb',
   textColor: '#ffffff',
   textColorSecondary: '#a4b1cd',
-  background: '#141517',
-  backgroundDarker: '#000000',
-  backgroundLighter: '#242525',
-  bgShadowColor: '#101010',
-  fgShadowColor: '#3f550e',
-  primaryTransparent: '#9fef0012',
+  background: '#0f0c1d',
+  backgroundDarker: '#1a1426',
+  backgroundLighter: '#2a2438',
+  bgShadowColor: '#0f0c1d',
+  fgShadowColor: '#6527a0',
+  primaryTransparent: '#8a2be212',
 
   // Action Colors
   info: '#04e4f4',

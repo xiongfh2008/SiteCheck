@@ -1,25 +1,35 @@
 ---
+import { t } from '@/lib/i18n-service';
+
+// Define props interface
+interface Props {
+  lang?: string;
+}
+
+// Get props
+const { lang = 'en' } = Astro.props;
+
 const repo = 'github.com/lissy93/web-check';
 const github = `https://${repo}`;
 
 const licenseText = 'MIT';
 const licenseLink = `${github}/blob/master/LICENSE`;
 
-const aboutLink = '/about';
-const projectName = 'Web Check';
+const aboutLink = `/about?lang=${lang}`;
+const projectName = 'Website Check';
 
 const authorName = 'Alicia Sykes';
 const authorLink = 'https://aliciasykes.com';
 const currentYear = new Date().getFullYear();
 ---
 
-<footer>
+<footer class="hidden-footer">
   <p>
-    View source at <a href={github}>{repo}</a>
+    {t('footer.contribute', lang)} <a href={github}>{repo}</a>
   </p>
   <p>
     <a href={aboutLink}>{projectName}</a>
-    is licensed under
+    {t('footer.licensed_under', lang) || ' is licensed under '}
     <a href={licenseLink}>{licenseText}</a>
     - © <a href={authorLink}>{authorName}</a>
     {currentYear}
@@ -49,5 +59,9 @@ const currentYear = new Date().getFullYear();
       flex-direction: column;
       align-items: center;
     }
+  }
+  
+  .hidden-footer {
+    display: none !important;
   }
 </style>

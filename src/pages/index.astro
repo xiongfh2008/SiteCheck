@@ -1,47 +1,58 @@
 ---
 import BaseLayout from '@layouts/Base.astro';
+import NavBar from '@components/scafold/Nav.astro';
 import HeroForm from '@components/homepage/HeroForm.astro';
 import TempDisabled from '@/components/homepage/TempDisabled.astro';
 import HomeBackground from '@/components/homepage/HomeBackground';
 import AboutSection from '@/components/homepage/AboutSection.astro';
 import Footer from '@components/scafold/Footer.astro';
+import { t } from '@/lib/i18n-service';
 
 const isBossServer = import.meta.env.BOSS_SERVER === true;
 
 const disableEverything = import.meta.env.VITE_DISABLE_EVERYTHING === true;
 
-// Redirect strait to /check or /check/:url if running as self-hosted instance
-if (!isBossServer) {
-  const searchUrl = new URLSearchParams(new URL(Astro.request.url).search).get('url');
-  const redirectUrl = searchUrl ? `/check/${encodeURIComponent(searchUrl)}` : '/check';
-  Astro.redirect(redirectUrl);
+// 获取当前语言，默认为英语
+const url = new URL(Astro.request.url);
+const currentLang = url.searchParams.get('lang') || 'en';
+
+// Only redirect if there's a specific URL parameter, otherwise show the home page
+const searchUrl = new URLSearchParams(new URL(Astro.request.url).search).get('url');
+if (!isBossServer && searchUrl) {
+  const redirectUrl = `/check/${encodeURIComponent(searchUrl)}?lang=${currentLang}`;
+  return Astro.redirect(redirectUrl);
 }
 
 ---
 
-<BaseLayout>
-  <Fragment slot="head">
-    {!isBossServer && (<meta http-equiv="refresh" content="0; url=/check" />)}
-  </Fragment>
-  { disableEverything && <TempDisabled />}
-  <main>
-    <HeroForm />
-    <AboutSection />
-  </main>
-  <Footer />
+<BaseLayout title={`${t('home.title', currentLang)} | Website Check`} description={t('home.subtitle', currentLang)} lang={currentLang}>
+  <div class="web-check-page">
+    <NavBar currentLang={currentLang} />
+    { disableEverything && <TempDisabled />}
+    <main>
+      <HeroForm lang={currentLang} />
+      <AboutSection lang={currentLang} />
+    </main>
+    <Footer lang={currentLang} />
+  </div>
   <HomeBackground client:only="react" />
 </BaseLayout>
 
 <style lang="scss">
   @import '@styles/global.scss';
   main {
-    min-height: 100vh;
+    min-height: calc(100vh - 100px);
     padding: 2rem;
-    margin: 0 auto;
+    margin: -50px auto 0 auto;  /* 上移 main 元素 */
     z-index: 3;
     background: var(--background);
+    max-width: 1400px;
+    width: 100%;
+    
     @include tablet-landscape-down {
       width: 96vw;
+      padding: 1rem;
+      margin: -30px auto 0 auto;  /* 响应式上移 */
     }
 
     .screenshot {

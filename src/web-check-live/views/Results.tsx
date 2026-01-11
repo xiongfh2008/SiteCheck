@@ -9,6 +9,7 @@ import Heading from 'web-check-live/components/Form/Heading';
 import Modal from 'web-check-live/components/Form/Modal';
 import Footer from 'web-check-live/components/misc/Footer';
 import Nav from 'web-check-live/components/Form/Nav';
+import LanguageHandler from 'web-check-live/components/misc/LanguageHandler';
 import type { RowProps }  from 'web-check-live/components/Form/Row';
 
 import Loader from 'web-check-live/components/misc/Loader';
@@ -240,7 +241,7 @@ const Results = (props: { address?: string } ): JSX.Element => {
             { error: `Failed to get a valid response 😢\n`
             + 'This is likely due the target not exposing the required data, '
             + 'or limitations in imposed by the infrastructure this instance '
-            + 'of Web Check is running on.\n\n'
+            + 'of Website Check is running on.\n\n'
             + `Error info:\n${error}`}
           ));
     });
@@ -270,14 +271,16 @@ const Results = (props: { address?: string } ): JSX.Element => {
   }, [address, addressType, setIpAddress]);  
 
   // Get IP address location info
-  const [locationResults, updateLocationResults] = useMotherHook<ServerLocation>({
-    jobId: 'location',
-    updateLoadingJobs,
-    addressInfo: { address: ipAddress, addressType: 'ipV4', expectedAddressTypes: ['ipV4', 'ipV6'] },
-    fetchRequest: () => fetch(`https://ipapi.co/${ipAddress}/json/`)
-      .then(res => parseJson(res))
-      .then(res => getLocation(res)),
-  });
+  // Commenting out due to requiring external API
+  // const [locationResults, updateLocationResults] = useMotherHook<ServerLocation>({
+  //   jobId: 'location',
+  //   updateLoadingJobs,
+  //   addressInfo: { address: ipAddress, addressType: 'ipV4', expectedAddressTypes: ['ipV4', 'ipV6'] },
+  //   fetchRequest: () => fetch(`https://ipapi.co/${ipAddress}/json/`)
+  //     .then(res => parseJson(res))
+  //     .then(res => getLocation(res)),
+  // });
+  const [locationResults, updateLocationResults] = useState<ServerLocation | undefined>(undefined);
 
   // Fetch and parse SSL certificate info
   const [sslResults, updateSslResults] = useMotherHook({
@@ -314,14 +317,19 @@ const Results = (props: { address?: string } ): JSX.Element => {
   });
 
   // Get hostnames and associated domains from Shodan
-  const [shoadnResults, updateShodanResults] = useMotherHook<ShodanResults>({
-    jobId: ['hosts', 'server-info'],
-    updateLoadingJobs,
-    addressInfo: { address: ipAddress, addressType: 'ipV4', expectedAddressTypes: ['ipV4', 'ipV6'] },
-    fetchRequest: () => fetch(`https://api.shodan.io/shodan/host/${ipAddress}?key=${keys.shodan}`)
-      .then(res => parseJson(res))
-      .then(res => parseShodanResults(res)),
-  });
+  // Commenting out due to requiring external API key
+  // const [shoadnResults, updateShodanResults] = useMotherHook<ShodanResults>({
+  //   jobId: ['hosts', 'server-info'],
+  //   updateLoadingJobs,
+  //   addressInfo: { address: ipAddress, addressType: 'ipV4', expectedAddressTypes: ['ipV4', 'ipV6'] },
+  //   fetchRequest: () => fetch(`https://api.shodan.io/shodan/host/${ipAddress}?key=${keys.shodan}`)
+  //     .then(res => parseJson(res))
+  //     .then(res => parseShodanResults(res)),
+  // });
+  const [shoadnResults, updateShodanResults] = useState<ShodanResults | undefined>(undefined);
+  
+  // Empty function for Shodan refresh since we're not using the Shodan API
+  const dummyUpdateFunction = () => {};
 
   // Fetch and parse cookies info
   const [cookieResults, updateCookieResults] = useMotherHook<{cookies: Cookie[]}>({
@@ -507,7 +515,7 @@ const Results = (props: { address?: string } ): JSX.Element => {
     jobId: 'whois',
     updateLoadingJobs,
     addressInfo: { address, addressType, expectedAddressTypes: urlTypeOnly },
-    fetchRequest: () => fetch(`https://api.whoapi.com/?domain=${address}&r=whois&apikey=${keys.whoApi}`)
+    fetchRequest: () => fetch(`${api}/whois?url=${address}`)
       .then(res => parseJson(res))
       .then(res => applyWhoIsResults(res)),
   });
@@ -589,7 +597,7 @@ const Results = (props: { address?: string } ): JSX.Element => {
       title: 'Server Location',
       result: locationResults,
       Component: ServerLocationCard,
-      refresh: updateLocationResults,
+      refresh: dummyUpdateFunction,
       tags: ['server'],
     }, {
       id: 'ssl',
@@ -624,7 +632,7 @@ const Results = (props: { address?: string } ): JSX.Element => {
       title: 'Server Info',
       result: shoadnResults?.serverInfo,
       Component: ServerInfoCard,
-      refresh: updateShodanResults,
+      refresh: dummyUpdateFunction,
       tags: ['server'],
     }, {
       id: 'cookies',
@@ -652,7 +660,7 @@ const Results = (props: { address?: string } ): JSX.Element => {
       title: 'Host Names',
       result: shoadnResults?.hostnames,
       Component: HostNamesCard,
-      refresh: updateShodanResults,
+      refresh: dummyUpdateFunction,
       tags: ['server'],
     }, {
       id: 'http-security',
@@ -941,6 +949,7 @@ const Results = (props: { address?: string } ): JSX.Element => {
       <Footer />
       <Modal isOpen={modalOpen} closeModal={()=> setModalOpen(false)}>{modalContent}</Modal>
       <ToastContainer limit={3} draggablePercent={60} autoClose={2500} theme="dark" position="bottom-right" />
+      <LanguageHandler />
     </ResultsOuter>
   );
 }

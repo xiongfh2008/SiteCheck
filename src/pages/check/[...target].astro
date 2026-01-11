@@ -1,22 +1,28 @@
 ---
 import BaseLayout from '@layouts/Base.astro';
+import NavBar from '@components/scafold/Nav.astro';
 import Main from '../../web-check-live/main.tsx';
 import '../../web-check-live/styles/index.css';
 
 export const prerender = false;
 
-const { pathname, search } = new URL(Astro.request.url);
+const url = new URL(Astro.request.url);
+const { pathname, search } = url;
+const currentLang = new URLSearchParams(url.search).get('lang') || 'en';
 
 const searchUrl = new URLSearchParams(search).get('url');
 
 if (searchUrl) {
-  Astro.redirect(`/check/${encodeURIComponent(searchUrl)}`);
+  Astro.redirect(`/check/${encodeURIComponent(searchUrl)}?lang=${currentLang}`);
 }
 
 ---
 
-<BaseLayout>
-  <Main {pathname} client:load />
+<BaseLayout lang={currentLang}>
+  <div class="web-check-page">
+    <NavBar currentLang={currentLang} />
+    <Main {pathname} client:load />
+  </div>
 </BaseLayout>
 
 <script>
@@ -24,7 +30,8 @@ if (searchUrl) {
   // And if form has been submitted with ?url=, redirect to the results page
   const searchParams = new URL(window.location.href).searchParams;
   if (searchParams.has('url')) {
-    window.location.href = `/check/${encodeURIComponent(searchParams.get('url') || '')}`;
+    const currentLang = new URLSearchParams(window.location.search).get('lang') || 'en';
+    window.location.href = `/check/${encodeURIComponent(searchParams.get('url') || '')}?lang=${currentLang}`;
   }
 
   // And add a manual no-react form submit handler
@@ -33,8 +40,9 @@ if (searchUrl) {
     form.addEventListener('submit', function(event: Event) {
       event.preventDefault();
       const input = (this as HTMLFormElement).querySelector<HTMLInputElement>('input[name="url"]');  
+      const currentLang = new URLSearchParams(window.location.search).get('lang') || 'en';
       if (input && input.value) {
-        window.location.href = `/check/${encodeURIComponent(input.value)}`;
+        window.location.href = `/check/${encodeURIComponent(input.value)}?lang=${currentLang}`;
       }
     });
   }

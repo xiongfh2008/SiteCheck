@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import colors from 'web-check-live/styles/colors';
 import Heading from 'web-check-live/components/Form/Heading';
 import Footer from 'web-check-live/components/misc/Footer';
+import LanguageHandler from 'web-check-live/components/misc/LanguageHandler';
 import Nav from 'web-check-live/components/Form/Nav';
 import Button from 'web-check-live/components/Form/Button';
 import AdditionalResources from 'web-check-live/components/misc/AdditionalResources';
@@ -333,6 +334,7 @@ const About = (): JSX.Element => {
         </p>
       </Section>
     </AboutContainer>
+    <LanguageHandler />
     <Footer />
     </div>
   );

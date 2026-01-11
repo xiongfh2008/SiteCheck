@@ -1,5 +1,13 @@
 ---
-const buttonText = 'Analyze URL';
+import { t } from '@/lib/i18n-service';
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'en' } = Astro.props;
+
+const buttonText = t('home.submit', lang) || 'Analyze URL';
 const buttonType = 'submit';
 ---
 
@@ -25,12 +33,12 @@ const buttonType = 'submit';
   }
 
   .button {
-    padding: 1rem;
+    padding: 1.2rem 2rem;
     background: transparent;
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: var(--text-color-secondary);
     border: 2px solid var(--text-color-thirdly);
-    border-radius: 3px;
+    border-radius: 8px;
     font-weight: bold;
     background: var(--background);   
     cursor: pointer;
@@ -42,9 +50,15 @@ const buttonType = 'submit';
     --c2: var(--text-color-thirdly);
     border-image: conic-gradient(from var(--angle), var(--c2), var(--c1) 0.5turn, var(--c1) 0.15turn, var(--c2) 0.25turn) 1;
     animation: borderRotate 3500ms linear infinite forwards;
-    transition: border 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    width: 100%;
     &:hover {
       border: 2px solid var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    &:active {
+      transform: translateY(0);
     }
   }
 

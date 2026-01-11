@@ -16,8 +16,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #141517;
-  color: #fff;
+  background: var(--background);
+  color: var(--text-color);
 }
 
 code {
@@ -28,13 +28,13 @@ code {
 
 
 ::selection {
-  background: var(--primary, #d6fb41);
-  color: var(--background, #141517);
+  background: var(--primary, #8a2be2);
+  color: var(--background, #0f0c1d);
 }
 
 
 svg.rsm-svg {
-  background: #141517;
+  background: var(--background);
   border-radius: 6px;
 }
 

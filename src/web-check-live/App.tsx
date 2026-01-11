@@ -1,4 +1,5 @@
-import { Routes, Route, Outlet } from 'react-router-dom';
+import { Routes, Route, Outlet, useLocation } from 'react-router-dom';
+import { LanguageProvider } from './contexts/LanguageContext';
 
 import Home from 'web-check-live/views/Home.tsx';
 import Results from 'web-check-live/views/Results.tsx';
@@ -17,18 +18,28 @@ const Layout = () => {
   );
 }
 
+// 子路由组件，用于处理 URL 参数
+const ResultsWrapper = () => {
+  const location = useLocation();
+  const urlPath = location.pathname.split('/').pop() || '';
+  // 将 URL 参数传递给 Results 组件
+  return <Results />;
+};
+
 export default function App() {
   return (
-    <ErrorBoundary>
-      <Routes>
-        <Route path="/check" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="home" element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path=":urlToScan" element={<Results />} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </ErrorBoundary>
+    <LanguageProvider>
+      <ErrorBoundary>
+        <Routes>
+          <Route path="/check" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="home" element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path=":urlToScan/*" element={<ResultsWrapper />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </ErrorBoundary>
+    </LanguageProvider>
   );
 }

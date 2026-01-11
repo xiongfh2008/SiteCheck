@@ -1,0 +1,1250 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"> <head><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><!-- Core info --><title>Website Check</title><meta name="description" content="Website Check is the all-in-one OSINT and security tool, for revealing the inner workings of any website"><meta name="keywords" content=""><meta name="author" content="Alicia Sykes"><!-- Page info, viewport, Astro credit --><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.7.1"><meta name="robots" content="index, follow"><!-- Icons and colors --><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" type="image/png" sizes="512x512" href="/web-check.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><!-- Social media meta tags (Open Graphh + Twitter) --><meta property="og:site_name" content="Website Check"><meta property="og:type" content="website"><meta property="og:url" content="https://web-check.xyz"><meta property="og:title" content="Website Check - X-Ray Vision for any Website"><meta property="og:description" content="Website Check is the all-in-one OSINT and security tool, for revealing the inner workings of any website"><meta property="og:image" content="https://web-check.xyz/banner.png"><meta name="twitter:card" content="summary"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:url" content="https://web-check.xyz"><meta name="twitter:title" content="Website Check - X-Ray Vision for any Website"><meta name="twitter:description" content="Website Check is the all-in-one OSINT and security tool, for revealing the inner workings of any website"><meta name="twitter:image" content="https://web-check.xyz/banner.png" }><link rel="twitter:image" sizes="180x180" href="https://web-check.xyz/apple-touch-icon.png"><meta name="twitter:site" content="@Lissy_Sykes"><meta name="twitter:creator" content="@Lissy_Sykes"><!-- Non-tracking hit counter --><!-- Schema.org markup for Google --><link href="/fonts/Hubot-Sans/Hubot-Sans.woff2" as="font" rel="preload" type="font/woff2" crossorigin="anonymous"><style data-vite-dev-id="D:/AIProject/SiteCheck/node_modules/astro/components/ViewTransitions.astro?astro&#38;type=style&#38;index=0&#38;lang.css">/* Route announcer */
+	.astro-route-announcer {
+		position: absolute;
+		left: 0;
+		top: 0;
+		clip: rect(0 0 0 0);
+		clip-path: inset(50%);
+		overflow: hidden;
+		white-space: nowrap;
+		width: 1px;
+		height: 1px;
+	}</style>
+<style data-vite-dev-id="D:/AIProject/SiteCheck/src/styles/typography.scss">@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hubot Sans";
+  src: url("/fonts/Hubot-Sans/WOFF2/HubotSans-Regular.woff2") format("woff2"), url("/fonts/Hubot-Sans/TTF/HubotSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hubot Sans";
+  src: url("/fonts/Hubot-Sans/WOFF2/HubotSans-Italic.woff2") format("woff2"), url("/fonts/Hubot-Sans/TTF/HubotSans-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hubot Sans";
+  src: url("/fonts/Hubot-Sans/WOFF2/HubotSans-Bold.woff2") format("woff2"), url("/fonts/Hubot-Sans/TTF/HubotSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hubot Sans";
+  src: url("/fonts/Hubot-Sans/WOFF2/HubotSans-BoldItalic.woff2") format("woff2"), url("/fonts/Hubot-Sans/TTF/HubotSans-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hubot Sans";
+  src: url("/fonts/Hubot-Sans/WOFF2/HubotSans-Light.woff2") format("woff2"), url("/fonts/Hubot-Sans/TTF/HubotSans-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hubot Sans";
+  src: url("/fonts/Hubot-Sans/WOFF2/HubotSans-LightItalic.woff2") format("woff2"), url("/fonts/Hubot-Sans/TTF/HubotSans-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hubot Sans";
+  src: url("/fonts/Hubot-Sans/WOFF2/HubotSans-Medium.woff2") format("woff2"), url("/fonts/Hubot-Sans/TTF/HubotSans-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hubot Sans";
+  src: url("/fonts/Hubot-Sans/WOFF2/HubotSans-MediumItalic.woff2") format("woff2"), url("/fonts/Hubot-Sans/TTF/HubotSans-MediumItalic.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hubot Sans";
+  src: url("/fonts/Hubot-Sans/WOFF2/HubotSans-ExtraBold.woff2") format("woff2"), url("/fonts/Hubot-Sans/TTF/HubotSans-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hubot Sans";
+  src: url("/fonts/Hubot-Sans/WOFF2/HubotSans-ExtraBoldItalic.woff2") format("woff2"), url("/fonts/Hubot-Sans/TTF/HubotSans-ExtraBoldItalic.ttf") format("truetype");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}</style>
+<style data-vite-dev-id="D:/AIProject/SiteCheck/src/styles/global.scss">/* Global Stylesheet */
+:root {
+  --primary: #d6fb41;
+  --primary-lighter: #cff97a;
+  --text-color: #ffffff;
+  --text-color-secondary: #ffffffb6;
+  --text-color-thirdly: #ffffff5b;
+  --background: #111211;
+  --background-darker: #111927;
+  --background-lighter: #3A3B3A;
+  --background-50: #11121180;
+  --bg-shadow-color: #0f1620;
+  --fg-shadow-color: #456602;
+  --primary-transparent: #d6fb4130;
+  --info: #04e4f4;
+  --success: #20e253;
+  --warning: #f6f000;
+  --error: #fca016;
+  --danger: #f80363;
+  --neutral: #272f4d;
+}
+html[data-theme=light] {
+  --primary: #4a7700;
+  --primary-lighter: #a4cf50;
+  --text-color: #333333;
+  --text-color-secondary: #57667e;
+  --background: #ffffff;
+  --background-darker: #f0f0f0;
+  --background-lighter: #fafafa;
+  --bg-shadow-color: #e0e0e0;
+  --fg-shadow-color: #678800;
+  --primary-transparent: #4a770033;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hubot Sans";
+  src: url("/fonts/Hubot-Sans/WOFF2/HubotSans-Regular.woff2") format("woff2"), url("/fonts/Hubot-Sans/TTF/HubotSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hubot Sans";
+  src: url("/fonts/Hubot-Sans/WOFF2/HubotSans-Italic.woff2") format("woff2"), url("/fonts/Hubot-Sans/TTF/HubotSans-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hubot Sans";
+  src: url("/fonts/Hubot-Sans/WOFF2/HubotSans-Bold.woff2") format("woff2"), url("/fonts/Hubot-Sans/TTF/HubotSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hubot Sans";
+  src: url("/fonts/Hubot-Sans/WOFF2/HubotSans-BoldItalic.woff2") format("woff2"), url("/fonts/Hubot-Sans/TTF/HubotSans-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hubot Sans";
+  src: url("/fonts/Hubot-Sans/WOFF2/HubotSans-Light.woff2") format("woff2"), url("/fonts/Hubot-Sans/TTF/HubotSans-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hubot Sans";
+  src: url("/fonts/Hubot-Sans/WOFF2/HubotSans-LightItalic.woff2") format("woff2"), url("/fonts/Hubot-Sans/TTF/HubotSans-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hubot Sans";
+  src: url("/fonts/Hubot-Sans/WOFF2/HubotSans-Medium.woff2") format("woff2"), url("/fonts/Hubot-Sans/TTF/HubotSans-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hubot Sans";
+  src: url("/fonts/Hubot-Sans/WOFF2/HubotSans-MediumItalic.woff2") format("woff2"), url("/fonts/Hubot-Sans/TTF/HubotSans-MediumItalic.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hubot Sans";
+  src: url("/fonts/Hubot-Sans/WOFF2/HubotSans-ExtraBold.woff2") format("woff2"), url("/fonts/Hubot-Sans/TTF/HubotSans-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hubot Sans";
+  src: url("/fonts/Hubot-Sans/WOFF2/HubotSans-ExtraBoldItalic.woff2") format("woff2"), url("/fonts/Hubot-Sans/TTF/HubotSans-ExtraBoldItalic.ttf") format("truetype");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+/* CSS Reset - Normalize dimensions and spacing across browsers */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+}
+::selection {
+  background: var(--primary);
+  color: var(--background);
+}
+/* HTML and body basic setup */
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+body {
+  font-family: "Hubot Sans", "Inter", "Helvetica Neue", Arial, sans-serif;
+  line-height: 1;
+  color: var(--text-color);
+  background: var(--background);
+  overflow-x: hidden;
+  font-weight: 400;
+  margin: 0;
+  min-height: 100vh;
+  position: relative;
+}
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover, a:focus {
+  text-decoration: underline;
+}
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+}
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  color: inherit;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-weight: normal;
+}
+p {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+ul, ol {
+  margin-top: 0;
+  margin-bottom: 1em;
+  padding-left: 20px;
+}
+/* Forms */
+input, button, textarea, select {
+  font: inherit;
+}
+input:focus, button:focus, textarea:focus, select:focus {
+  outline: 1px solid var(--primary);
+}
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+.hidden {
+  display: none;
+}
+.bold {
+  font-weight: 600;
+}
+.italic {
+  font-style: italic;
+}
+.underline {
+  text-decoration: underline;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+  color: var(--text-color);
+}
+h1 {
+  font-size: 2.25rem;
+}
+h2 {
+  font-size: 1.8rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+h4 {
+  font-size: 1.2rem;
+}
+h5 {
+  font-size: 1rem;
+}
+h6 {
+  font-size: 0.85rem;
+}
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.6rem;
+  }
+  h3 {
+    font-size: 1.4rem;
+  }
+}
+p {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}</style>
+<style data-vite-dev-id="D:/AIProject/SiteCheck/src/styles/colors.scss">:root {
+  --primary: #d6fb41;
+  --primary-lighter: #cff97a;
+  --text-color: #ffffff;
+  --text-color-secondary: #ffffffb6;
+  --text-color-thirdly: #ffffff5b;
+  --background: #111211;
+  --background-darker: #111927;
+  --background-lighter: #3A3B3A;
+  --background-50: #11121180;
+  --bg-shadow-color: #0f1620;
+  --fg-shadow-color: #456602;
+  --primary-transparent: #d6fb4130;
+  --info: #04e4f4;
+  --success: #20e253;
+  --warning: #f6f000;
+  --error: #fca016;
+  --danger: #f80363;
+  --neutral: #272f4d;
+}
+
+html[data-theme=light] {
+  --primary: #4a7700;
+  --primary-lighter: #a4cf50;
+  --text-color: #333333;
+  --text-color-secondary: #57667e;
+  --background: #ffffff;
+  --background-darker: #f0f0f0;
+  --background-lighter: #fafafa;
+  --bg-shadow-color: #e0e0e0;
+  --fg-shadow-color: #678800;
+  --primary-transparent: #4a770033;
+}</style>
+<style data-vite-dev-id="D:/AIProject/SiteCheck/src/styles/media-queries.scss"></style>
+<style data-vite-dev-id="D:/AIProject/SiteCheck/node_modules/react-toastify/dist/ReactToastify.css">:root {
+  --toastify-color-light: #fff;
+  --toastify-color-dark: #121212;
+  --toastify-color-info: #3498db;
+  --toastify-color-success: #07bc0c;
+  --toastify-color-warning: #f1c40f;
+  --toastify-color-error: #e74c3c;
+  --toastify-color-transparent: rgba(255, 255, 255, 0.7);
+  --toastify-icon-color-info: var(--toastify-color-info);
+  --toastify-icon-color-success: var(--toastify-color-success);
+  --toastify-icon-color-warning: var(--toastify-color-warning);
+  --toastify-icon-color-error: var(--toastify-color-error);
+  --toastify-toast-width: 320px;
+  --toastify-toast-offset: 16px;
+  --toastify-toast-top: max(var(--toastify-toast-offset), env(safe-area-inset-top));
+  --toastify-toast-right: max(var(--toastify-toast-offset), env(safe-area-inset-right));
+  --toastify-toast-left: max(var(--toastify-toast-offset), env(safe-area-inset-left));
+  --toastify-toast-bottom: max(var(--toastify-toast-offset), env(safe-area-inset-bottom));
+  --toastify-toast-background: #fff;
+  --toastify-toast-min-height: 64px;
+  --toastify-toast-max-height: 800px;
+  --toastify-toast-bd-radius: 6px;
+  --toastify-font-family: sans-serif;
+  --toastify-z-index: 9999;
+  --toastify-text-color-light: #757575;
+  --toastify-text-color-dark: #fff;
+  --toastify-text-color-info: #fff;
+  --toastify-text-color-success: #fff;
+  --toastify-text-color-warning: #fff;
+  --toastify-text-color-error: #fff;
+  --toastify-spinner-color: #616161;
+  --toastify-spinner-color-empty-area: #e0e0e0;
+  --toastify-color-progress-light: linear-gradient(
+    to right,
+    #4cd964,
+    #5ac8fa,
+    #007aff,
+    #34aadc,
+    #5856d6,
+    #ff2d55
+  );
+  --toastify-color-progress-dark: #bb86fc;
+  --toastify-color-progress-info: var(--toastify-color-info);
+  --toastify-color-progress-success: var(--toastify-color-success);
+  --toastify-color-progress-warning: var(--toastify-color-warning);
+  --toastify-color-progress-error: var(--toastify-color-error);
+  --toastify-color-progress-bgo: 0.2;
+}
+
+.Toastify__toast-container {
+  z-index: var(--toastify-z-index);
+  -webkit-transform: translate3d(0, 0, var(--toastify-z-index));
+  position: fixed;
+  padding: 4px;
+  width: var(--toastify-toast-width);
+  box-sizing: border-box;
+  color: #fff;
+}
+.Toastify__toast-container--top-left {
+  top: var(--toastify-toast-top);
+  left: var(--toastify-toast-left);
+}
+.Toastify__toast-container--top-center {
+  top: var(--toastify-toast-top);
+  left: 50%;
+  transform: translateX(-50%);
+}
+.Toastify__toast-container--top-right {
+  top: var(--toastify-toast-top);
+  right: var(--toastify-toast-right);
+}
+.Toastify__toast-container--bottom-left {
+  bottom: var(--toastify-toast-bottom);
+  left: var(--toastify-toast-left);
+}
+.Toastify__toast-container--bottom-center {
+  bottom: var(--toastify-toast-bottom);
+  left: 50%;
+  transform: translateX(-50%);
+}
+.Toastify__toast-container--bottom-right {
+  bottom: var(--toastify-toast-bottom);
+  right: var(--toastify-toast-right);
+}
+
+@media only screen and (max-width : 480px) {
+  .Toastify__toast-container {
+    width: 100vw;
+    padding: 0;
+    left: env(safe-area-inset-left);
+    margin: 0;
+  }
+  .Toastify__toast-container--top-left, .Toastify__toast-container--top-center, .Toastify__toast-container--top-right {
+    top: env(safe-area-inset-top);
+    transform: translateX(0);
+  }
+  .Toastify__toast-container--bottom-left, .Toastify__toast-container--bottom-center, .Toastify__toast-container--bottom-right {
+    bottom: env(safe-area-inset-bottom);
+    transform: translateX(0);
+  }
+  .Toastify__toast-container--rtl {
+    right: env(safe-area-inset-right);
+    left: initial;
+  }
+}
+.Toastify__toast {
+  --y: 0;
+  position: relative;
+  -ms-touch-action: none;
+      touch-action: none;
+  min-height: var(--toastify-toast-min-height);
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+  padding: 8px;
+  border-radius: var(--toastify-toast-bd-radius);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  max-height: var(--toastify-toast-max-height);
+  font-family: var(--toastify-font-family);
+  cursor: default;
+  direction: ltr;
+  /* webkit only issue #791 */
+  z-index: 0;
+  overflow: hidden;
+}
+.Toastify__toast--stacked {
+  position: absolute;
+  width: 100%;
+  transform: translate3d(0, var(--y), 0) scale(var(--s));
+  transition: transform 0.3s;
+}
+.Toastify__toast--stacked[data-collapsed] .Toastify__toast-body, .Toastify__toast--stacked[data-collapsed] .Toastify__close-button {
+  transition: opacity 0.1s;
+}
+.Toastify__toast--stacked[data-collapsed=false] {
+  overflow: visible;
+}
+.Toastify__toast--stacked[data-collapsed=true]:not(:last-child) > * {
+  opacity: 0;
+}
+.Toastify__toast--stacked:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: calc(var(--g) * 1px);
+  bottom: 100%;
+}
+.Toastify__toast--stacked[data-pos=top] {
+  top: 0;
+}
+.Toastify__toast--stacked[data-pos=bot] {
+  bottom: 0;
+}
+.Toastify__toast--stacked[data-pos=bot].Toastify__toast--stacked:before {
+  transform-origin: top;
+}
+.Toastify__toast--stacked[data-pos=top].Toastify__toast--stacked:before {
+  transform-origin: bottom;
+}
+.Toastify__toast--stacked:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  transform: scaleY(3);
+  z-index: -1;
+}
+.Toastify__toast--rtl {
+  direction: rtl;
+}
+.Toastify__toast--close-on-click {
+  cursor: pointer;
+}
+.Toastify__toast-body {
+  margin: auto 0;
+  -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
+  padding: 6px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+}
+.Toastify__toast-body > div:last-child {
+  word-break: break-word;
+  -ms-flex: 1;
+      flex: 1;
+}
+.Toastify__toast-icon {
+  -webkit-margin-end: 10px;
+          margin-inline-end: 10px;
+  width: 20px;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.Toastify--animate {
+  animation-fill-mode: both;
+  animation-duration: 0.5s;
+}
+
+.Toastify--animate-icon {
+  animation-fill-mode: both;
+  animation-duration: 0.3s;
+}
+
+@media only screen and (max-width : 480px) {
+  .Toastify__toast {
+    margin-bottom: 0;
+    border-radius: 0;
+  }
+}
+.Toastify__toast-theme--dark {
+  background: var(--toastify-color-dark);
+  color: var(--toastify-text-color-dark);
+}
+.Toastify__toast-theme--light {
+  background: var(--toastify-color-light);
+  color: var(--toastify-text-color-light);
+}
+.Toastify__toast-theme--colored.Toastify__toast--default {
+  background: var(--toastify-color-light);
+  color: var(--toastify-text-color-light);
+}
+.Toastify__toast-theme--colored.Toastify__toast--info {
+  color: var(--toastify-text-color-info);
+  background: var(--toastify-color-info);
+}
+.Toastify__toast-theme--colored.Toastify__toast--success {
+  color: var(--toastify-text-color-success);
+  background: var(--toastify-color-success);
+}
+.Toastify__toast-theme--colored.Toastify__toast--warning {
+  color: var(--toastify-text-color-warning);
+  background: var(--toastify-color-warning);
+}
+.Toastify__toast-theme--colored.Toastify__toast--error {
+  color: var(--toastify-text-color-error);
+  background: var(--toastify-color-error);
+}
+
+.Toastify__progress-bar-theme--light {
+  background: var(--toastify-color-progress-light);
+}
+.Toastify__progress-bar-theme--dark {
+  background: var(--toastify-color-progress-dark);
+}
+.Toastify__progress-bar--info {
+  background: var(--toastify-color-progress-info);
+}
+.Toastify__progress-bar--success {
+  background: var(--toastify-color-progress-success);
+}
+.Toastify__progress-bar--warning {
+  background: var(--toastify-color-progress-warning);
+}
+.Toastify__progress-bar--error {
+  background: var(--toastify-color-progress-error);
+}
+.Toastify__progress-bar-theme--colored.Toastify__progress-bar--info, .Toastify__progress-bar-theme--colored.Toastify__progress-bar--success, .Toastify__progress-bar-theme--colored.Toastify__progress-bar--warning, .Toastify__progress-bar-theme--colored.Toastify__progress-bar--error {
+  background: var(--toastify-color-transparent);
+}
+
+.Toastify__close-button {
+  color: #fff;
+  background: transparent;
+  outline: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: 0.3s ease;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  z-index: 1;
+}
+.Toastify__close-button--light {
+  color: #000;
+  opacity: 0.3;
+}
+.Toastify__close-button > svg {
+  fill: currentColor;
+  height: 16px;
+  width: 14px;
+}
+.Toastify__close-button:hover, .Toastify__close-button:focus {
+  opacity: 1;
+}
+
+@keyframes Toastify__trackProgress {
+  0% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(0);
+  }
+}
+.Toastify__progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--toastify-z-index);
+  opacity: 0.7;
+  transform-origin: left;
+  border-bottom-left-radius: var(--toastify-toast-bd-radius);
+}
+.Toastify__progress-bar--animated {
+  animation: Toastify__trackProgress linear 1 forwards;
+}
+.Toastify__progress-bar--controlled {
+  transition: transform 0.2s;
+}
+.Toastify__progress-bar--rtl {
+  right: 0;
+  left: initial;
+  transform-origin: right;
+  border-bottom-left-radius: initial;
+  border-bottom-right-radius: var(--toastify-toast-bd-radius);
+}
+.Toastify__progress-bar--wrp {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  border-bottom-left-radius: var(--toastify-toast-bd-radius);
+}
+.Toastify__progress-bar--wrp[data-hidden=true] {
+  opacity: 0;
+}
+.Toastify__progress-bar--bg {
+  opacity: var(--toastify-color-progress-bgo);
+  width: 100%;
+  height: 100%;
+}
+
+.Toastify__spinner {
+  width: 20px;
+  height: 20px;
+  box-sizing: border-box;
+  border: 2px solid;
+  border-radius: 100%;
+  border-color: var(--toastify-spinner-color-empty-area);
+  border-right-color: var(--toastify-spinner-color);
+  animation: Toastify__spin 0.65s linear infinite;
+}
+
+@keyframes Toastify__bounceInRight {
+  from, 60%, 75%, 90%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  from {
+    opacity: 0;
+    transform: translate3d(3000px, 0, 0);
+  }
+  60% {
+    opacity: 1;
+    transform: translate3d(-25px, 0, 0);
+  }
+  75% {
+    transform: translate3d(10px, 0, 0);
+  }
+  90% {
+    transform: translate3d(-5px, 0, 0);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes Toastify__bounceOutRight {
+  20% {
+    opacity: 1;
+    transform: translate3d(-20px, var(--y), 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(2000px, var(--y), 0);
+  }
+}
+@keyframes Toastify__bounceInLeft {
+  from, 60%, 75%, 90%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  0% {
+    opacity: 0;
+    transform: translate3d(-3000px, 0, 0);
+  }
+  60% {
+    opacity: 1;
+    transform: translate3d(25px, 0, 0);
+  }
+  75% {
+    transform: translate3d(-10px, 0, 0);
+  }
+  90% {
+    transform: translate3d(5px, 0, 0);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes Toastify__bounceOutLeft {
+  20% {
+    opacity: 1;
+    transform: translate3d(20px, var(--y), 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(-2000px, var(--y), 0);
+  }
+}
+@keyframes Toastify__bounceInUp {
+  from, 60%, 75%, 90%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  from {
+    opacity: 0;
+    transform: translate3d(0, 3000px, 0);
+  }
+  60% {
+    opacity: 1;
+    transform: translate3d(0, -20px, 0);
+  }
+  75% {
+    transform: translate3d(0, 10px, 0);
+  }
+  90% {
+    transform: translate3d(0, -5px, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes Toastify__bounceOutUp {
+  20% {
+    transform: translate3d(0, calc(var(--y) - 10px), 0);
+  }
+  40%, 45% {
+    opacity: 1;
+    transform: translate3d(0, calc(var(--y) + 20px), 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(0, -2000px, 0);
+  }
+}
+@keyframes Toastify__bounceInDown {
+  from, 60%, 75%, 90%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -3000px, 0);
+  }
+  60% {
+    opacity: 1;
+    transform: translate3d(0, 25px, 0);
+  }
+  75% {
+    transform: translate3d(0, -10px, 0);
+  }
+  90% {
+    transform: translate3d(0, 5px, 0);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes Toastify__bounceOutDown {
+  20% {
+    transform: translate3d(0, calc(var(--y) - 10px), 0);
+  }
+  40%, 45% {
+    opacity: 1;
+    transform: translate3d(0, calc(var(--y) + 20px), 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(0, 2000px, 0);
+  }
+}
+.Toastify__bounce-enter--top-left, .Toastify__bounce-enter--bottom-left {
+  animation-name: Toastify__bounceInLeft;
+}
+.Toastify__bounce-enter--top-right, .Toastify__bounce-enter--bottom-right {
+  animation-name: Toastify__bounceInRight;
+}
+.Toastify__bounce-enter--top-center {
+  animation-name: Toastify__bounceInDown;
+}
+.Toastify__bounce-enter--bottom-center {
+  animation-name: Toastify__bounceInUp;
+}
+
+.Toastify__bounce-exit--top-left, .Toastify__bounce-exit--bottom-left {
+  animation-name: Toastify__bounceOutLeft;
+}
+.Toastify__bounce-exit--top-right, .Toastify__bounce-exit--bottom-right {
+  animation-name: Toastify__bounceOutRight;
+}
+.Toastify__bounce-exit--top-center {
+  animation-name: Toastify__bounceOutUp;
+}
+.Toastify__bounce-exit--bottom-center {
+  animation-name: Toastify__bounceOutDown;
+}
+
+@keyframes Toastify__zoomIn {
+  from {
+    opacity: 0;
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes Toastify__zoomOut {
+  from {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+    transform: translate3d(0, var(--y), 0) scale3d(0.3, 0.3, 0.3);
+  }
+  to {
+    opacity: 0;
+  }
+}
+.Toastify__zoom-enter {
+  animation-name: Toastify__zoomIn;
+}
+
+.Toastify__zoom-exit {
+  animation-name: Toastify__zoomOut;
+}
+
+@keyframes Toastify__flipIn {
+  from {
+    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  40% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    animation-timing-function: ease-in;
+  }
+  60% {
+    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    opacity: 1;
+  }
+  80% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+  }
+  to {
+    transform: perspective(400px);
+  }
+}
+@keyframes Toastify__flipOut {
+  from {
+    transform: translate3d(0, var(--y), 0) perspective(400px);
+  }
+  30% {
+    transform: translate3d(0, var(--y), 0) perspective(400px) rotate3d(1, 0, 0, -20deg);
+    opacity: 1;
+  }
+  to {
+    transform: translate3d(0, var(--y), 0) perspective(400px) rotate3d(1, 0, 0, 90deg);
+    opacity: 0;
+  }
+}
+.Toastify__flip-enter {
+  animation-name: Toastify__flipIn;
+}
+
+.Toastify__flip-exit {
+  animation-name: Toastify__flipOut;
+}
+
+@keyframes Toastify__slideInRight {
+  from {
+    transform: translate3d(110%, 0, 0);
+    visibility: visible;
+  }
+  to {
+    transform: translate3d(0, var(--y), 0);
+  }
+}
+@keyframes Toastify__slideInLeft {
+  from {
+    transform: translate3d(-110%, 0, 0);
+    visibility: visible;
+  }
+  to {
+    transform: translate3d(0, var(--y), 0);
+  }
+}
+@keyframes Toastify__slideInUp {
+  from {
+    transform: translate3d(0, 110%, 0);
+    visibility: visible;
+  }
+  to {
+    transform: translate3d(0, var(--y), 0);
+  }
+}
+@keyframes Toastify__slideInDown {
+  from {
+    transform: translate3d(0, -110%, 0);
+    visibility: visible;
+  }
+  to {
+    transform: translate3d(0, var(--y), 0);
+  }
+}
+@keyframes Toastify__slideOutRight {
+  from {
+    transform: translate3d(0, var(--y), 0);
+  }
+  to {
+    visibility: hidden;
+    transform: translate3d(110%, var(--y), 0);
+  }
+}
+@keyframes Toastify__slideOutLeft {
+  from {
+    transform: translate3d(0, var(--y), 0);
+  }
+  to {
+    visibility: hidden;
+    transform: translate3d(-110%, var(--y), 0);
+  }
+}
+@keyframes Toastify__slideOutDown {
+  from {
+    transform: translate3d(0, var(--y), 0);
+  }
+  to {
+    visibility: hidden;
+    transform: translate3d(0, 500px, 0);
+  }
+}
+@keyframes Toastify__slideOutUp {
+  from {
+    transform: translate3d(0, var(--y), 0);
+  }
+  to {
+    visibility: hidden;
+    transform: translate3d(0, -500px, 0);
+  }
+}
+.Toastify__slide-enter--top-left, .Toastify__slide-enter--bottom-left {
+  animation-name: Toastify__slideInLeft;
+}
+.Toastify__slide-enter--top-right, .Toastify__slide-enter--bottom-right {
+  animation-name: Toastify__slideInRight;
+}
+.Toastify__slide-enter--top-center {
+  animation-name: Toastify__slideInDown;
+}
+.Toastify__slide-enter--bottom-center {
+  animation-name: Toastify__slideInUp;
+}
+
+.Toastify__slide-exit--top-left, .Toastify__slide-exit--bottom-left {
+  animation-name: Toastify__slideOutLeft;
+  animation-timing-function: ease-in;
+  animation-duration: 0.3s;
+}
+.Toastify__slide-exit--top-right, .Toastify__slide-exit--bottom-right {
+  animation-name: Toastify__slideOutRight;
+  animation-timing-function: ease-in;
+  animation-duration: 0.3s;
+}
+.Toastify__slide-exit--top-center {
+  animation-name: Toastify__slideOutUp;
+  animation-timing-function: ease-in;
+  animation-duration: 0.3s;
+}
+.Toastify__slide-exit--bottom-center {
+  animation-name: Toastify__slideOutDown;
+  animation-timing-function: ease-in;
+  animation-duration: 0.3s;
+}
+
+@keyframes Toastify__spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+                                             </style>
+<style data-vite-dev-id="D:/AIProject/SiteCheck/src/web-check-live/styles/index.css">@font-face {
+  font-family: 'PTMono';
+  src: url('/fonts/PTMono-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'PTMono', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #141517;
+  color: #fff;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+#fancy-background { color: var(--background, #141517); }
+
+
+::selection {
+  background: var(--primary, #d6fb41);
+  color: var(--background, #141517);
+}
+
+
+svg.rsm-svg {
+  background: #141517;
+  border-radius: 6px;
+}
+
+:root {
+  --toastify-color-dark: #111927 !important;
+  --toastify-color-info: #04e4f4 !important;
+  --toastify-color-success: #20e253 !important;
+  --toastify-color-warning: #f6f000 !important;
+  --toastify-color-error: #f80363 !important;
+}
+
+#fancy-background {
+  position: absolute;
+}
+</style><script type="module" src="/src/pages/check/[...target].astro?astro&type=script&index=0&lang.ts"></script>
+<script type="module" src="/node_modules/astro/components/ViewTransitions.astro?astro&type=script&index=0&lang.ts"></script>
+<script type="module" src="/src/components/I18nProvider.astro?astro&type=script&index=0&lang.ts"></script>
+<script type="module" src="/@vite/client"></script>
+<script type="module" src="/@fs/D:/AIProject/SiteCheck/node_modules/astro/dist/runtime/client/dev-toolbar/entrypoint.js?v=3fd23dc1"></script>
+<script>window.__astro_dev_toolbar__ = {"root":"D:\\AIProject\\SiteCheck\\","version":"4.7.1","debugInfo":"Astro                    v4.7.1\nNode                     v22.18.0\nSystem                   Windows (x64)\nPackage Manager          npm\nOutput                   hybrid\nAdapter                  @astrojs/node\nIntegrations             @astrojs/svelte\n                         @astrojs/react\n                         @astrojs/partytown\n                         @astrojs/sitemap\n                         @astrojs/node"}</script>
+<script>!(function(w,p,f,c){if(!window.crossOriginIsolated && !navigator.serviceWorker) return;c=w[p]=Object.assign(w[p]||{},{"lib":"/~partytown/","debug":true});c[f]=(c[f]||[])})(window,'partytown','forward');/* Partytown 0.10.2 - MIT builder.io */
+const t={preserveBehavior:!1},e=e=>{if("string"==typeof e)return[e,t];const[n,r=t]=e;return[n,{...t,...r}]},n=Object.freeze((t=>{const e=new Set;let n=[];do{Object.getOwnPropertyNames(n).forEach((t=>{"function"==typeof n[t]&&e.add(t)}))}while((n=Object.getPrototypeOf(n))!==Object.prototype);return Array.from(e)})());!function(t,r,o,i,a,s,c,d,l,p,u=t,f){function h(){f||(f=1,"/"==(c=(s.lib||"/~partytown/")+(s.debug?"debug/":""))[0]&&(l=r.querySelectorAll('script[type="text/partytown"]'),i!=t?i.dispatchEvent(new CustomEvent("pt1",{detail:t})):(d=setTimeout(v,1e4),r.addEventListener("pt0",w),a?y(1):o.serviceWorker?o.serviceWorker.register(c+(s.swPath||"partytown-sw.js"),{scope:c}).then((function(t){t.active?y():t.installing&&t.installing.addEventListener("statechange",(function(t){"activated"==t.target.state&&y()}))}),console.error):v())))}function y(e){p=r.createElement(e?"script":"iframe"),t._pttab=Date.now(),e||(p.style.display="block",p.style.width="0",p.style.height="0",p.style.border="0",p.style.visibility="hidden",p.setAttribute("aria-hidden",!0)),p.src=c+"partytown-"+(e?"atomics.js?v=0.10.2":"sandbox-sw.html?"+t._pttab),r.querySelector(s.sandboxParent||"body").appendChild(p)}function v(n,o){for(w(),i==t&&(s.forward||[]).map((function(n){const[r]=e(n);delete t[r.split(".")[0]]})),n=0;n<l.length;n++)(o=r.createElement("script")).innerHTML=l[n].innerHTML,o.nonce=s.nonce,r.head.appendChild(o);p&&p.parentNode.removeChild(p)}function w(){clearTimeout(d)}s=t.partytown||{},i==t&&(s.forward||[]).map((function(r){const[o,{preserveBehavior:i}]=e(r);u=t,o.split(".").map((function(e,r,o){var a;u=u[o[r]]=r+1<o.length?u[o[r]]||(a=o[r+1],n.includes(a)?[]:{}):(()=>{let e=null;if(i){const{methodOrProperty:n,thisObject:r}=((t,e)=>{let n=t;for(let t=0;t<e.length-1;t+=1)n=n[e[t]];return{thisObject:n,methodOrProperty:e.length>0?n[e[e.length-1]]:void 0}})(t,o);"function"==typeof n&&(e=(...t)=>n.apply(r,...t))}return function(){let n;return e&&(n=e(arguments)),(t._ptf=t._ptf||[]).push(o,arguments),n}})()}))})),"complete"==r.readyState?h():(t.addEventListener("DOMContentLoaded",h),t.addEventListener("load",h))}(window,document,navigator,top,window.crossOriginIsolated);;((d,s)=>(s=d.currentScript,d.addEventListener('astro:before-swap',()=>s.remove(),{once:true})))(document);</script>
+<script type="module" src="/node_modules/astro/components/ViewTransitions.astro?astro&type=style&index=0&lang.css"></script>
+<script type="module" src="/src/styles/typography.scss"></script>
+<script type="module" src="/src/styles/global.scss"></script>
+<script type="module" src="/src/styles/colors.scss"></script>
+<script type="module" src="/src/styles/media-queries.scss"></script>
+<script type="module" src="/node_modules/react-toastify/dist/ReactToastify.css"></script>
+<script type="module" src="/src/web-check-live/styles/index.css"></script></head> <body data-astro-source-file="D:/AIProject/SiteCheck/src/layouts/Base.astro" data-astro-source-loc="41:8"> <!-- å½éåæä¾ç¨åº -->   <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();;(()=>{var A=Object.defineProperty;var g=(a,o,i)=>o in a?A(a,o,{enumerable:!0,configurable:!0,writable:!0,value:i}):a[o]=i;var l=(a,o,i)=>(g(a,typeof o!="symbol"?o+"":o,i),i);{let a={0:t=>y(t),1:t=>i(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(i(t)),5:t=>new Set(i(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t)},o=t=>{let[h,e]=t;return h in a?a[h](e):void 0},i=t=>t.map(o),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([h,e])=>[h,o(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let c=this.querySelectorAll("astro-slot"),n={},p=this.querySelectorAll("template[data-astro-template]");for(let r of p){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of c){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("name")||"default"]=r.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(s+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}let d,m=this.hydrator(this);d=performance.now(),await m(this.Component,u,n,{client:this.getAttribute("client")}),d&&this.setAttribute("client-render-time",(performance.now()-d).toString()),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),c.disconnect(),this.childrenConnectedCallback()},c=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});c.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}async start(){let e=JSON.parse(this.getAttribute("opts")),c=this.getAttribute("client");if(Astro[c]===void 0){window.addEventListener(`astro:${c}`,()=>this.start(),{once:!0});return}try{await Astro[c](async()=>{let n=this.getAttribute("renderer-url"),[p,{default:u}]=await Promise.all([import(this.getAttribute("component-url")),n?import(n):()=>()=>{}]),d=this.getAttribute("component-export")||"default";if(!d.includes("."))this.Component=p[d];else{this.Component=p;for(let m of d.split("."))this.Component=this.Component[m]}return this.hydrator=u,this.hydrate},e,this)}catch(n){console.error(`[astro-island] Error hydrating ${this.getAttribute("component-url")}`,n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="Z23MX9n" prefix="r0" component-url="/src/web-check-live/main.tsx" component-export="default" renderer-url="/node_modules/.vite/deps/@astrojs_react_client__js.js?v=3fd23dc1" props="{&quot;pathname&quot;:[0,&quot;/check&quot;]}" ssr="" client="load" before-hydration-url="/@id/astro:scripts/before-hydration.js" opts="{&quot;name&quot;:&quot;Main&quot;,&quot;value&quot;:true}" server-render-time="1.9433000013232231" await-children=""><style data-emotion="css-global 10vz1ot">@font-face{font-family:PTMono;font-style:normal;font-weight:400;src:url('/fonts/PTMono.ttf') format('ttf');}body,div,a,p,span,ul,li,small,h1,h2,h3,h4,button,section{font-family:PTMono;color:#fff;}#fancy-background p span{color:transparent;}</style><style data-emotion="css rkqjyn">.css-rkqjyn{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;height:100%;font-family:'PTMono';padding:1.5rem 1rem 4rem 1rem;}.css-rkqjyn footer{z-index:1;}</style><section class="css-rkqjyn"><div id="fancy-background"><p><span class="dead">0</span></p><p><span class="alive">0</span></p><p><span class="drawn">0</span></p><p><span class="fps">0</span></p></div><style data-emotion="css fj7qsl">.css-fj7qsl{background:#242525;box-shadow:4px 4px 0px #101010;border-radius:8px;padding:1rem;z-index:5;margin:1rem;width:calc(100% - 2rem);max-width:60rem;z-index:2;}</style><form class="css-fj7qsl"><a href="/"><style data-emotion="css 1pgs4ts">.css-1pgs4ts{margin:0.5rem 0;text-shadow:2px 2px 0px #101010;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;gap:1rem;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:1.5rem;font-size:3rem;text-align:center;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;color:#c1fb41;}.css-1pgs4ts img{width:2.5rem;border-radius:4px;}.css-1pgs4ts a{color:inherit;-webkit-text-decoration:none;text-decoration:none;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;}</style><h1 color="#c1fb41" class="css-1pgs4ts" id="object-objectweb-check"><img width="64" src="/web-check.png" alt="Web Check Icon"/>Web Check</h1></a><style data-emotion="css s2xx8j">.css-s2xx8j{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;}</style><div orientation="vertical" class="css-s2xx8j"><style data-emotion="css tlcbyb">.css-tlcbyb{color:#ffffff;font-size:2rem;border-radius:0.25rem;padding:1rem 1.75rem;margin:0.5rem;padding:0;font-size:1.6rem;}</style><label for="user-input" class="css-tlcbyb">Enter a URL</label><style data-emotion="css royo8u">.css-royo8u{background:#141517;color:#ffffff;border:none;border-radius:0.25rem;font-family:PTMono;box-shadow:3px 3px 0px #000000;font-size:2rem;border-radius:0.25rem;padding:1rem 1.75rem;margin:0.5rem;}.css-royo8u:focus{outline:1px solid #c1fb41;}</style><input id="user-input" placeholder="e.g. https://duck.com/" name="url" class="css-royo8u" value=""/></div><style data-emotion="css 1ioq829">.css-1ioq829{cursor:pointer;border:none;border-radius:0.25rem;font-family:PTMono;box-sizing:border-box;width:-moz-available;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;gap:1rem;box-shadow:3px 3px 0px #3f550e;font-size:2rem;border-radius:0.25rem;padding:1rem 1.75rem;margin:0.5rem;background:#c1fb41;color:#141517;width:calc(100% - 1rem);}.css-1ioq829:hover{box-shadow:5px 5px 0px #3f550e;}.css-1ioq829:active{box-shadow:-3px -3px 0px #3f550e;}</style><button type="submit" class="css-1ioq829">Analyze!</button></form><style data-emotion="css 1hqp0qh">.css-1hqp0qh{background:#242525;box-shadow:4px 4px 0px #101010;border-radius:8px;padding:1rem;z-index:5;margin:1rem;width:calc(100% - 2rem);max-width:60rem;z-index:2;}.css-1hqp0qh .inner{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;gap:1rem;}.css-1hqp0qh .inner p{margin:0.25rem 0;}.css-1hqp0qh a{color:#ffffff;}.css-1hqp0qh img{border-radius:0.25rem;box-shadow:2px 2px 0px #3f550e;-webkit-transition:box-shadow 0.2s;transition:box-shadow 0.2s;margin:0 auto;display:block;width:200px;}.css-1hqp0qh img:hover{box-shadow:4px 4px 0px #3f550e;}.css-1hqp0qh img:active{box-shadow:-2px -2px 0px #3f550e;}.css-1hqp0qh .cta{font-size:0.78rem;}.css-1hqp0qh .cta a{color:#c1fb41;}</style><div class="css-1hqp0qh"><style data-emotion="css l73xm6">.css-l73xm6{margin:0.5rem 0;text-shadow:2px 2px 0px #101010;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;gap:1rem;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:1.5rem;font-size:1rem;color:#c1fb41;}.css-l73xm6 img{width:2.5rem;border-radius:4px;}.css-l73xm6 a{color:inherit;-webkit-text-decoration:none;text-decoration:none;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;}</style><h2 color="#c1fb41" class="css-l73xm6" id="sponsored-by">Sponsored by</h2><div class="inner"><p><a target="_blank" rel="noreferrer" href="https://terminaltrove.com/?utm_campaign=github&amp;utm_medium=referral&amp;utm_content=web-check&amp;utm_source=wcgh">Terminal Trove</a> - The $HOME of all things in the terminal.<br/><span class="cta">Get updates on the latest CLI/TUI tools via the <a target="_blank" rel="noreferrer" class="cta" href="https://terminaltrove.com/newsletter?utm_campaign=github&amp;utm_medium=referral&amp;utm_content=web-check&amp;utm_source=wcgh">Terminal Trove newsletter</a></span></p><a target="_blank" rel="noreferrer" href="https://terminaltrove.com/?utm_campaign=github&amp;utm_medium=referral&amp;utm_content=web-check&amp;utm_source=wcgh"><img width="120" alt="Terminal Trove" src="https://i.ibb.co/NKtYjJ1/terminal-trove-web-check.png"/></a></div></div><style data-emotion="css a7yzsg">.css-a7yzsg{background:#242525;color:#ffffff;box-shadow:4px 4px 0px #101010;border-radius:8px;padding:1rem;position:relative;max-height:64rem;overflow:auto;margin:1rem;width:calc(100% - 2rem);max-width:60rem;z-index:2;}.css-a7yzsg .links{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;gap:0.5rem;}.css-a7yzsg .links a{width:100%;}.css-a7yzsg .links a button{width:calc(100% - 2rem);}@media(max-width: 600px){.css-a7yzsg .links{-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;}}.css-a7yzsg ul{-webkit-column-width:150px;-moz-column-width:150px;-webkit-column-width:150px;column-width:150px;list-style:none;padding:0 1rem;font-size:0.9rem;color:#ffffff;}.css-a7yzsg ul li{margin:0.1rem 0;text-indent:-1.2rem;break-inside:avoid-column;}.css-a7yzsg ul li:before{content:'â';color:#c1fb41;margin-right:0.5rem;}.css-a7yzsg a{color:#c1fb41;}</style><section class="css-a7yzsg"><div class="features"><h2 color="#c1fb41" class="css-l73xm6" id="supported-checks">Supported Checks</h2><ul><li>IP Info</li><li>SSL Chain</li><li>DNS Records</li><li>Cookies</li><li>Crawl Rules</li><li>Headers</li><li>Quality Metrics</li><li>Server Location</li><li>Associated Hosts</li><li>Redirect Chain</li><li>TXT Records</li><li>Server Status</li><li>Open Ports</li><li>Traceroute</li><li>Carbon Footprint</li><li>Server Info</li><li>Whois Lookup</li><li>Domain Info</li><li>DNS Security Extensions</li><li>Site Features</li><li>HTTP Strict Transport Security</li><li>DNS Server</li><li>Tech Stack</li><li>Listed Pages</li><li>Security.txt</li><li>Linked Pages</li><li>Social Tags</li><li>Email Configuration</li><li>Firewall Detection</li><li>HTTP Security Features</li><li>Archive History</li><li>Global Ranking</li><li>Block Detection</li><li>Malware &amp; Phishing Detection</li><li>TLS Cipher Suites</li><li>TLS Security Config</li><li>TLS Handshake Simulation</li><li>Screenshot</li><li><a href="/check/about">+ more!</a></li></ul></div><div class="links"><a target="_blank" rel="noreferrer" href="https://github.com/lissy93/web-check" title="Check out the source code and documentation on GitHub, and get support or contribute"><style data-emotion="css 1ednhzd">.css-1ednhzd{cursor:pointer;border:none;border-radius:0.25rem;font-family:PTMono;box-sizing:border-box;width:-moz-available;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;gap:1rem;box-shadow:3px 3px 0px #3f550e;font-size:1rem;border-radius:0.25rem;padding:0.5rem 1rem;margin:0.5rem;background:#c1fb41;color:#141517;}.css-1ednhzd:hover{box-shadow:5px 5px 0px #3f550e;}.css-1ednhzd:active{box-shadow:-3px -3px 0px #3f550e;}</style><button type="button" class="css-1ednhzd">View on GitHub</button></a><a target="_blank" rel="noreferrer" href="https://app.netlify.com/start/deploy?repository=https://github.com/lissy93/web-check" title="Deploy your own private or public instance of Web-Check to Netlify"><button type="button" class="css-1ednhzd">Deploy your own</button></a><a title="View the API documentation, to use Web-Check programmatically" href="/check/about#api-documentation"><button type="button" class="css-1ednhzd">API Docs</button></a></div></section><style data-emotion="css 1eumm2f">.css-1eumm2f{bottom:0;width:100%;text-align:center;padding:0.5rem 0;background:#000000;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:space-around;-ms-flex-pack:space-around;-webkit-justify-content:space-around;justify-content:space-around;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-align-content:center;-ms-flex-line-pack:center;align-content:center;-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;opacity:0.75;-webkit-transition:all 0.2s ease-in-out;transition:all 0.2s ease-in-out;}@media (min-width: 1024px){.css-1eumm2f{-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;}}.css-1eumm2f:hover{opacity:1;}.css-1eumm2f span{margin:0 0.5rem;text-align:center;}</style><footer style="position:fixed" class="css-1eumm2f"><span>View source at <style data-emotion="css 1x6f9ig">.css-1x6f9ig{color:#c1fb41;font-weight:bold;border-radius:4px;padding:0.1rem;-webkit-transition:all 0.2s ease-in-out;transition:all 0.2s ease-in-out;}.css-1x6f9ig:hover{background:#c1fb41;color:#000000;-webkit-text-decoration:none;text-decoration:none;}</style><a href="https://github.com/lissy93/web-check" class="css-1x6f9ig">github.com/lissy93/web-check</a></span><span><a href="/about">Web-Check</a> is licensed under <a href="https://github.com/lissy93/web-check/blob/master/LICENSE" class="css-1x6f9ig">MIT</a> - Â© <a href="https://aliciasykes.com" class="css-1x6f9ig">Alicia Sykes</a> 2023</span></footer></section><!--astro:end--></astro-island>   </body></html> 

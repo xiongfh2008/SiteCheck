@@ -1,21 +1,30 @@
 ---
+import LanguageSwitcher from '@components/LanguageSwitcher.astro';
+import { t } from '@/lib/i18n-service';
 
+const url = new URL(Astro.request.url);
+const currentLang = url.searchParams.get('lang') || 'en';
+
+const navHome = t('navigation.home', currentLang);
+const navApi = t('navigation.api', currentLang);
+const navAccount = t('navigation.account', currentLang);
 ---
 
 <nav class="navbar">
   <div class="nav-left">
-    <a href="/" class="logo-link" aria-label="Home">
-      <img width="64" src="/favicon.svg" alt="Site Logo" />
+    <a href={`/?lang=${currentLang}`} class="logo-link" aria-label={navHome}>
+      <img width="64" height="64" src="/favicon.svg" alt="Site Logo" />
       <h2 class="site-title">
-        <span class="first">Web</span>
+        <span class="first">Site</span>
         <span class="second">Check</span>
       </h2>
     </a>
   </div>
   <div class="nav-right">
-    <a href="/check" class="nav-link">Check</a>
-    <a href="/web-check-api" class="nav-link">API</a>
-    <a href="/account" class="nav-link">Login</a>
+    <a href={`/?lang=${currentLang}`} class="nav-link">{navHome}</a>
+    <a href={`/web-check-api?lang=${currentLang}`} class="nav-link">{navApi}</a>
+    <a href={`/account?lang=${currentLang}`} class="nav-link">{navAccount}</a>
+    <LanguageSwitcher currentLang={currentLang} />
   </div>
 </nav>
 
@@ -30,7 +39,7 @@
     background-color: var(--background);
     color: var(--text-color);
     width: 80vw;
-    margin: 0 auto;
+    margin: 1rem auto;
     border-radius: 2rem;
     border: 1px solid var(--primary-transparent);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);

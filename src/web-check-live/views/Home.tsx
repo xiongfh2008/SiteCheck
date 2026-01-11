@@ -7,6 +7,7 @@ import Input from 'web-check-live/components/Form/Input'
 import Button from 'web-check-live/components/Form/Button';
 import { StyledCard } from 'web-check-live/components/Form/Card';
 import Footer from 'web-check-live/components/misc/Footer';
+import LanguageHandler from 'web-check-live/components/misc/LanguageHandler';
 import FancyBackground from 'web-check-live/components/misc/FancyBackground';
 
 import docs from 'web-check-live/utils/docs';
@@ -219,8 +220,8 @@ const Home = (): JSX.Element => {
       <UserInputMain onSubmit={formSubmitEvent}>
         <a href="/">
           <Heading as="h1" size="xLarge" align="center" color={colors.primary}>
-            <img width="64" src="/web-check.png" alt="Web Check Icon" />
-            Web Check
+            <img width="64" src="/web-check.png" alt="Website Check Icon" />
+            Website Check
           </Heading>
         </a>
         <Input
@@ -293,6 +294,7 @@ const Home = (): JSX.Element => {
           </Link>
         </div>
       </SiteFeaturesWrapper>
+      <LanguageHandler />
       <Footer isFixed={true} />
     </HomeContainer>
   );

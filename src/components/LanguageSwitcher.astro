@@ -1,0 +1,85 @@
+---
+import { getSupportedLanguages, getLanguageName } from '@/lib/i18n-service';
+
+interface Props {
+  currentLang?: string;
+}
+
+const { currentLang = 'en' } = Astro.props;
+
+const languages = getSupportedLanguages();
+---
+
+<div class="language-switcher">
+  <select id="language-select">
+    {languages.map(lang => (
+      <option value={lang} {lang === currentLang ? 'selected' : ''}>
+        {getLanguageName(lang)}
+      </option>
+    ))}
+  </select>
+</div>
+
+<script is:inline>
+  // On page load, ensure the correct language is selected in the dropdown
+  document.addEventListener('DOMContentLoaded', function() {
+    const currentLang = new URLSearchParams(window.location.search).get('lang') || 'en';
+    const selectElement = document.getElementById('language-select');
+    if (selectElement) {
+      selectElement.value = currentLang;
+      
+      // Add event listener to handle language changes
+      selectElement.addEventListener('change', function() {
+        const selectedLang = this.value;
+        // Get current URL components
+        const url = new URL(window.location.href);
+        url.searchParams.set('lang', selectedLang);
+        
+        // Navigate to the new URL with updated language parameter
+        window.location.href = url.toString();
+      });
+    }
+  });
+</script>
+
+<style>
+  .language-switcher {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+  }
+  
+  #language-select {
+    padding: 0.4rem 2rem 0.4rem 0.75rem;
+    border-radius: 0.375rem;
+    border: 1px solid var(--primary);
+    background-color: var(--background-100);
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    outline: none;
+    transition: all 0.2s ease;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+  }
+  
+  #language-select:hover {
+    border-color: var(--primary-light);
+    background-color: var(--background-150);
+  }
+  
+  #language-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px var(--primary-transparent);
+  }
+  
+  #language-select option {
+    background-color: var(--background);
+    color: var(--text-color);
+    padding: 0.5rem;
+  }
+</style>

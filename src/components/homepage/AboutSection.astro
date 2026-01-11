@@ -3,58 +3,68 @@
 import ButtonGroup from '@components/homepage/ButtonGroup.astro';
 import Features from '@components/homepage/Features.astro';
 import SponsorSegment from '@components/homepage/SponsorSegment.astro';
+import { t } from '@/lib/i18n-service';
 
-const supportedChecks = [
-  'Archive History',
-  'Block List Check',
-  'Carbon Footprint',
-  'Cookies',
-  'DNS Server',
-  'DNS Records',
-  'DNSSEC',
-  'Site Features',
-  'Firewall Types',
-  'Get IP Address',
-  'Headers',
-  'HSTS',
-  'HTTP Security',
-  'Linked Pages',
-  'Mail Config',
-  'Open Ports',
-  'Quality Check',
-  'Global Rank',
-  'Redirects',
-  'Robots.txt',
-  'Screenshot',
-  'Security.txt',
-  'Sitemap',
-  'Social Tags',
-  'SSL Certificate',
-  'Uptime Status',
-  'Tech Stack',
-  'Known Threats',
-  'TLS Version',
-  'Trace Route',
-  'TXT Records',
-  'Whois Lookup'
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'en' } = Astro.props;
+
+const supportedChecksKeys = [
+  'checks.archive_history',
+  'checks.block_list',
+  'checks.carbon_footprint',
+  'checks.cookies',
+  'checks.dns_server',
+  'checks.dns_records',
+  'checks.dnssec',
+  'checks.site_features',
+  'checks.firewall_types',
+  'checks.ip_address',
+  'checks.headers',
+  'checks.hsts',
+  'checks.http_security',
+  'checks.linked_pages',
+  'checks.mail_config',
+  'checks.open_ports',
+  'checks.quality_check',
+  'checks.global_rank',
+  'checks.redirects',
+  'checks.robots_txt',
+  'checks.screenshot',
+  'checks.security_txt',
+  'checks.sitemap',
+  'checks.social_tags',
+  'checks.ssl_certificate',
+  'checks.uptime_status',
+  'checks.tech_stack',
+  'checks.known_threats',
+  'checks.tls_version',
+  'checks.trace_route',
+  'checks.txt_records',
+  'checks.whois_lookup'
 ];
+
+// 获取本地化的检查项列表
+const supportedChecks = supportedChecksKeys.map(key => t(key, lang) || key.split('.').pop());
 
 const links = [
   {
-    title: 'View on GitHub',
+    title: t('about.view_on_github', lang) || 'View on GitHub',
     url: 'https://github.com/lissy93/web-check',
     icon: 'github',
     isCta: true,
   },
   {
-    title: 'Deploy your Own',
-    url: '/self-hosted-setup',
+    title: t('about.deploy_your_own', lang) || 'Deploy your Own',
+    url: `/self-hosted-setup?lang=${lang}`,
     icon: 'rocket',
     isCta: false,
   },
   {
-    title: 'Use the API',
-    url: '/web-check-api',
+    title: t('about.use_api', lang) || 'Use the API',
+    url: `/web-check-api?lang=${lang}`,
     icon: 'code',
     isCta: false,
   },
@@ -64,17 +74,17 @@ const links = [
 
 <div class="about-section">
   <div class="features-wrap">
-    <h4>Ready to get started?</h4>
+    <h4>{t('about.ready_to_start', lang) || 'Ready to get started?'}</h4>
     <p class="what">
-      With over <span>30 supported checks</span>
-      you can view and analyse key website information in an instant
+      {t('about.with_over_checks', lang) || 'With over '}<span>{t('about.supported_checks_number', lang) || '30 supported checks'}</span>
+      {t('about.instant_analysis', lang) || ' you can view and analyse key website information in an instant'}
     </p>
   </div>
   <hr />
   <Features supportedChecks={supportedChecks} />
-  <ButtonGroup links={links} />
+  <ButtonGroup links={links} lang={lang} />
   <hr />
-  <SponsorSegment />
+  <SponsorSegment lang={lang} />
 </div>
 
 <style lang="scss">

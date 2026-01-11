@@ -1,0 +1,66 @@
+---
+import BaseLayout from '@layouts/Base.astro';
+import NavBar from '@components/scafold/Nav.astro';
+import Footer from '@components/scafold/Footer.astro';
+import { t } from '@/lib/i18n-service';
+
+const url = new URL(Astro.request.url);
+const currentLang = url.searchParams.get('lang') || 'en';
+
+---
+
+<BaseLayout
+  title={`${t('about.page_title', currentLang) || 'About'} | Website Check`}
+  description={t('about.page_description', currentLang) || 'Learn more about Website Check, an open-source tool for analyzing websites.'}
+>
+  <div class="web-check-page">
+    <NavBar currentLang={currentLang} />
+    <main>
+      <div class="about-content">
+        <h1>{t('about.page_title', currentLang) || 'About Website Check'}</h1>
+        <p>{t('about.page_intro', currentLang) || 'Website Check is a comprehensive tool for analyzing websites for security, privacy, and performance issues.'}</p>
+        
+        <h2>{t('about.features_title', currentLang) || 'Features'}</h2>
+        <p>{t('about.features_desc', currentLang) || 'With over 30 different checks, Website Check analyzes various aspects of a website including SSL certificates, DNS records, security headers, and much more.'}</p>
+        
+        <h2>{t('about.opensource_title', currentLang) || 'Open Source'}</h2>
+        <p>{t('about.opensource_desc', currentLang) || 'Website Check is completely open source and free to use. You can view the source code, contribute, or deploy your own instance.'}</p>
+        
+        <h2>{t('about.privacy_title', currentLang) || 'Privacy Focused'}</h2>
+        <p>{t('about.privacy_desc', currentLang) || 'We respect your privacy. No personal data is collected, and all analyses are processed securely.'}</p>
+      </div>
+    </main>
+    <Footer lang={currentLang} />
+  </div>
+</BaseLayout>
+
+<style>
+  .web-check-page {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 80vh;
+  }
+  
+  .about-content {
+    padding: 2rem 0;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+    margin: 1.5rem 0 1rem;
+    color: var(--text-color);
+  }
+  
+  p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+</style>

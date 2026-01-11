@@ -56,7 +56,7 @@ const adapter = getAdapter(deployTarget);
 
 // Print build information to console
 console.log(
-  `\n\x1b[1m\x1b[35m Preparing to start build of Web Check.... \x1b[0m\n`,
+  `\n\x1b[1m\x1b[35m Preparing to start build of Website Check.... \x1b[0m\n`,
   `\x1b[35m\x1b[2mCompiling for "${deployTarget}" using "${output}" mode, `
   + `to deploy to "${site}" at "${base}"\x1b[0m\n`,
   `\x1b[2m\x1b[36m🛟 For documentation and support, visit the GitHub repo: ` +
